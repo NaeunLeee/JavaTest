@@ -1,5 +1,15 @@
 package co.yedam.score;
 
+// 1. 클래스 설계도 (UML)
+
+// 2. 클래스 선언
+
+// 3. new 객체 생성
+
+// 4. 객체 이용 (메서드 호출)
+
+
+
 public class ScoreArrApp {
 
 	int a=10;
