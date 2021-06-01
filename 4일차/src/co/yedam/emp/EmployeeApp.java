@@ -3,8 +3,8 @@ package co.yedam.emp;
 import java.util.Scanner;
 
 public class EmployeeApp {
-	Employee[] employee = new Employee[10];
 	int cnt = 0;
+	Employee[] employee = new Employee[cnt];
 	int employeeId;
 	String name;
 	int salary;
