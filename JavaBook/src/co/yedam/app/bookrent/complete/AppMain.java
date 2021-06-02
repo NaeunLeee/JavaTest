@@ -25,7 +25,7 @@ public class AppMain {
 				bookService.delete();
 			} else if (selectNo == 4) {
 				bookService.selectAll();
-			}else if (selectNo == 5) {
+			} else if (selectNo == 5) {
 				bookService.selectOne();
 			} else if (selectNo == 6) {
 				run = false;
@@ -49,7 +49,7 @@ public class AppMain {
 				memberService.delete();
 			} else if (selectNo == 4) {
 				memberService.selectAll();
-			}else if (selectNo == 5) {
+			} else if (selectNo == 5) {
 				memberService.selectOne();
 			} else if (selectNo == 6) {
 				run = false;
@@ -73,7 +73,7 @@ public class AppMain {
 				rentService.delete();
 			} else if (selectNo == 4) {
 				rentService.selectAll();
-			}else if (selectNo == 5) {
+			} else if (selectNo == 5) {
 				rentService.selectOne();
 			} else if (selectNo == 6) {
 				run = false;
