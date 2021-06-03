@@ -53,4 +53,15 @@ public class Robot {
 	public void print() {		// 접근제한자를 아무것도 안 적어주면 패키지 내에서만 작동
 		System.out.printf("arm : %d | leg : %d | name : %s", arm, leg, name);
 	}
+	
+	public boolean equals(Object obj) {
+		Robot r2 = ((Robot)obj);
+		return r2.arm == this.arm && r2.leg == this.leg;
+	}
+
+	public String toString() {
+		return "arm : " + arm + " leg : " + leg;
+	}
+	
+	
 }
