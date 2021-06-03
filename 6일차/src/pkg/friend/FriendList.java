@@ -15,7 +15,7 @@ public class FriendList implements FriendAccess{
 		friends.add(friend);
 	}
 	public void update(Friend friend) {
-		
+		friends.set(0, friend);
 	}
 	public void delete(String name) {
 		

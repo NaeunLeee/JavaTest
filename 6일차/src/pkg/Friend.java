@@ -15,7 +15,6 @@ public class Friend {
 	public void print() {
 		System.out.printf("친구 : %10s %10s %10s\n", gubun, name, tel);
 	}
-	@Override
 	public String toString() {
 		return "Friend [gubun=" + gubun + ", name=" + name + ", tel=" + tel + "]";
 	}
