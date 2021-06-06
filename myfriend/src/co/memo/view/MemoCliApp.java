@@ -33,7 +33,7 @@ public class MemoCliApp {
 	}
 	// 날짜로 검색해서 메모 수정
 	private void update() {
-		Memo memo = new Memo();
+		Memo memo = new Memo(); 
 		memo.setDate(ScannerUtil.readStr("수정할 날짜"));
 		memo.setContent(ScannerUtil.readStr("수정할 내용"));
 		memoList.update(memo);

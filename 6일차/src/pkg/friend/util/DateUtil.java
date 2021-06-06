@@ -19,7 +19,7 @@ public class DateUtil {
 		SimpleDateFormat df = new SimpleDateFormat(format);
 		String s = df.format(date);
 		return s;
-	}
+	} 
 	// 두 날짜 사이의 일수 계산
 //	Calendar birth = Calendar.getInstance();
 	public static long durationDay(String s1, String s2) {

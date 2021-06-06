@@ -20,6 +20,6 @@ public class AppMain {
 		Count.cnt1++;
 		count1.setCnt2(count1.getCnt2()+1);
 		System.out.println(Count.cnt1);
-	}
+	} 
 
 }

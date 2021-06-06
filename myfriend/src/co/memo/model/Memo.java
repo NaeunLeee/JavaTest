@@ -4,11 +4,11 @@ public class Memo {
 	protected String date;
 	protected String content;
 	
-	public Memo() {}
+	public Memo() {} 
 	public Memo(String date, String content) {
 		super();
 		this.date = date;
-		this.content = content;
+		this.content = content; 
 	}
 	public String toString() {
 		return "Memo [date=" + date + ", content=" + content + "]";

@@ -9,7 +9,7 @@ public class BufferTest {
 	public static void main(String[] args) {
 		try {
 			BufferedReader fr = new BufferedReader(new FileReader("d:/temp/data.txt"));
-			PrintStream out = System.out;
+			PrintStream out = System.out; 
 			String a;
 			while (true) {
 				a = fr.readLine();

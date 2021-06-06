@@ -27,7 +27,7 @@ public class MemoList implements MemoAccess {
 			if (m.getDate().equals(memo.getDate())) {
 				m.setContent(memo.getContent());
 				save();
-			}
+			} 
 		}
 	}
 	// 메모 삭제

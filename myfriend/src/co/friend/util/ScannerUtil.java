@@ -11,7 +11,7 @@ public class ScannerUtil {
 	
 	public static int readInt(String prompt) {
 		System.out.print(prompt + " > ");
-		return readInt();
+		return readInt(); 
 	}
 	public static int readInt() {
 		int result = 0;

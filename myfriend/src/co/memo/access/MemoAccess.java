@@ -6,7 +6,7 @@ import co.memo.model.Memo;
 
 public interface MemoAccess {
 
-	// 등록
+	// 등록 
 	public void insert(Memo memo);
 	// 수정
 	public void update(Memo memo);
