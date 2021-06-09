@@ -152,7 +152,7 @@ public class SqliteConnect {
 			conn = DriverManager.getConnection(url);
 //			System.out.println("☆★☆★연결 성공★☆★☆");
 		} catch (SQLException e) {
-			System.out.println("=== 연결 실패 ===");;
+			System.out.println("=== 연결 실패 ===");
 		}
 	}
 	
