@@ -49,7 +49,7 @@ public class BoardApp {
 		System.out.println("전체 게시글을 조회합니다.");
 		List<Board> boardList = dao.selectAll();
 		for (Board board : boardList) {
-			System.out.println(board);
+			System.out.println(board.showInfo());
 		}
 	}
 	

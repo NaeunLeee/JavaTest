@@ -40,7 +40,7 @@ public class BoardDAO implements BoardAccess {
 		}
 		return boardList;
 	}
-
+	
 	// 게시글 등록 (제목/내용/작성자)
 	@Override
 	public void insert(Board board) {
