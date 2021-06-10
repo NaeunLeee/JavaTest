@@ -39,7 +39,7 @@ public class SqliteConnect {
 		}
 		return personList;
 	}
-	// 전체리스트 (오버로딩)
+	// 전체리스트 (오버로딩) -> 단건조회
 	public static ArrayList<Person> getPersonList(String name) {
 		ArrayList<Person> personList = new ArrayList<>();
 		connect();		// Connection 객체 연결
