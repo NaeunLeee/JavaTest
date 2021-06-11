@@ -45,7 +45,7 @@ public class MemoCliApp {
 
 	private void insert() {
 		System.out.println("메모를 등록하세요.");
-		System.out.print("날짜 (MM/dd) > ");
+		System.out.print("날짜 > ");
 		String date = scanner1.next();
 		System.out.print("제목 > ");
 		String title = scanner2.nextLine();
@@ -56,7 +56,7 @@ public class MemoCliApp {
 
 	private void update() {
 		System.out.println("메모를 수정합니다.");
-		System.out.print("수정할 메모의 날짜 (MM/dd) > ");
+		System.out.print("수정할 메모의 날짜 > ");
 		String date = scanner1.next();
 		System.out.print("수정할 내용 > ");
 		String content = scanner2.nextLine();
@@ -65,7 +65,7 @@ public class MemoCliApp {
 
 	private void delete() {
 		System.out.println("메모를 삭제합니다.");
-		System.out.print("삭제할 메모의 날짜 (MM/dd) > ");
+		System.out.print("삭제할 메모의 날짜 > ");
 		String date = scanner2.nextLine();
 		access.delete(date);
 	}
@@ -81,7 +81,7 @@ public class MemoCliApp {
 	}
 
 	private void findByDate() {
-		System.out.print("조회할 메모의 날짜 (MM/dd) > ");
+		System.out.print("조회할 메모의 날짜 > ");
 		String date = scanner2.nextLine();
 		if (access.FindByDate(date)!=null) {
 			access.FindByDate(date).print();;
