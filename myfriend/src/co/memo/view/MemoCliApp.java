@@ -6,7 +6,7 @@ import co.friend.util.ScannerUtil;
 import co.memo.access.MemoList;
 import co.memo.model.Memo;
 
-public class MemoCliApp {
+public class MemoCliApp { 
 
 	MemoList memoList = new MemoList();
 	

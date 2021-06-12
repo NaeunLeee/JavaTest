@@ -61,10 +61,10 @@ public class ScannerUtil {
 		System.out.print("구분, 이름, 전화번호 > ");
 		String result = scanner.next();
 		String[] arr = result.split(",");
-		Friend friend = new Friend();
-		friend.setGubun(arr[0]);
-		friend.setName(arr[1]);
-		friend.setTel(arr[2]);
+		Friend friend = new Friend(arr[0], arr[1], arr[2]);
+//		friend.setGubun(arr[0]);
+//		friend.setName(arr[1]);
+//		friend.setTel(arr[2]);
 		return friend;
 	}
 	// Memo 입력
