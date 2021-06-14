@@ -248,28 +248,34 @@ public class AcademyDAO implements AcademyAccess {
 	}
 	
 	// 출결 조회
-	public Attendance viewAttend(int id) {
+	public ArrayList<Attendance> viewAttend(int id) {
 		connect();
-		Attendance att = new Attendance();
+		ArrayList<Attendance> attList = new ArrayList<>();
 		String sql = "select * from attendance where id=?;";
 		try {
 			psmt1 = conn.prepareStatement(sql);
 			psmt1.setInt(1, id);
 			rs = psmt1.executeQuery();
 			while (rs.next()) {
-				att.
-			}
+				Attendance att = new Attendance();
+				att.setDate(rs.getString("date"));
+				att.setTime(rs.getString("time"));
+				att.setAttend(rs.getString("attend"));
+				attList.add(att);
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
 		}
-		return att;
+		return attList;
 	}
 	
 	// 원생 출석
-	public void attendCheck(int id, String date, String time, int hour) {
+	public void attendCheck(int id, String date, String time) {
 		connect();
-		String name = printName(id).viewName();
-		String sql = "insert into attendance (id, name, date, time, attend) values (?, ?, ?, ?, ?)";
-		
 		String attend = "결석";
+		int hour = Integer.parseInt(time.substring(0, 2));
 		if (hour>=13) {
 			System.out.println("[ 지각 ]");
 			attend = "지각";
@@ -277,13 +283,13 @@ public class AcademyDAO implements AcademyAccess {
 			System.out.println("[ 정상 출석 완료 ]");
 			attend = "정상";
 		}
+		String sql = "insert into attendance (id, date, time, attend) values (?, ?, ?, ?)";
 		try {
 			psmt1 = conn.prepareStatement(sql);
 			psmt1.setInt(1, id);
-			psmt1.setString(2, name);
-			psmt1.setString(3, date);
-			psmt1.setString(4, time);
-			psmt1.setString(5, attend);
+			psmt1.setString(2, date);
+			psmt1.setString(3, time);
+			psmt1.setString(4, attend);
 			int r = psmt1.executeUpdate();
 			System.out.println(r + "건 처리 되었습니다.");
 		} catch (SQLException e) {
@@ -291,8 +297,6 @@ public class AcademyDAO implements AcademyAccess {
 		} finally {
 			close();
 		}
-
-
 	}
 	
 	// 원생 비밀번호 변경

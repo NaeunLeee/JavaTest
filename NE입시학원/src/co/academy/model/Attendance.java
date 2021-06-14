@@ -3,7 +3,6 @@ package co.academy.model;
 public class Attendance {
 
 	int id;
-	String name;
 	String date;
 	String time;
 	String attend;
@@ -14,14 +13,6 @@ public class Attendance {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getDate() {
@@ -50,7 +41,14 @@ public class Attendance {
 
 	public Attendance() {}
 	
+	public Attendance(String date, String time, String attend) {
+		super();
+		this.date = date;
+		this.time = time;
+		this.attend = attend;
+	}
+
 	public String viewAtDetail() {
-		return name + " | 날짜 : " + date + " | 시간 : " + time + " | 출결 : " + attend;
+		return "날짜 : " + date + " | 시간 : " + time + " | 출결 : " + attend;
 	}
 }

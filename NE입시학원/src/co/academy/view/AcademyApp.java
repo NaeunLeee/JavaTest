@@ -4,10 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-
 import co.academy.access.AcademyAccess;
 import co.academy.access.AcademyDAO;
-import co.academy.model.Scores;
+import co.academy.model.Attendance;
 import co.academy.model.Student;
 
 public class AcademyApp {
@@ -24,10 +23,10 @@ public class AcademyApp {
 	public void mainScreen() {
 		int menuNum;
 		do {
-			System.out.println("=== NE ♥ 입시 학원 ===");
-			System.out.println("==| 1. 원생 로그인	|==");
-			System.out.println("==| 2. 교사 로그인	|==");
-			System.out.println("==| 0. 종료	|==");
+			System.out.println("===== NE ♥  입시 학원 =====");
+			System.out.println("==|   1. 원생 로그인	|==");
+			System.out.println("==|   2. 교사 로그인	|==");
+			System.out.println("==|   0. 종료		|==");
 			System.out.println("===================");
 			System.out.print("입력 > ");
 			menuNum = scn1.nextInt();
@@ -62,7 +61,7 @@ public class AcademyApp {
 		System.out.print("아이디 > ");
 		tcloginId = scn1.next();
 		System.out.print("비밀번호 > ");
-		String tcPW = scn2.nextLine();
+		String tcPW = scn2.next();
 		boolean b = access.tcLogIn(tcloginId, tcPW);
 		if (b=true) {
 			tcMenu();
@@ -91,8 +90,8 @@ public class AcademyApp {
 		System.out.println("==| 1. 출석	체크	|==");
 		System.out.println("==| 2. 성적 조회	|==");
 		System.out.println("==| 3. 비밀번호 변경	|==");
-		System.out.println("==| 0. 종료	|==");
-		System.out.println("===========================");
+		System.out.println("==| 0. 종료		|==");
+		System.out.println("==================================");
 	}
 	
 	public void attend() {
@@ -101,9 +100,8 @@ public class AcademyApp {
 		System.out.print("비밀번호를 입력하세요 > ");
 		String pw = scn1.next();
 		boolean b = access.stLogIn(stLoginId, pw);
-		int h = Integer.parseInt(t.substring(0, 2));
 		if (b=true) {
-			access.attendCheck(stLoginId, d, t, h);
+			access.attendCheck(stLoginId, d, t);
 		} else {
 			System.out.println("비밀번호를 다시 확인하세요.");
 		}
@@ -158,14 +156,14 @@ public class AcademyApp {
 	public void tcMenuTitle() {
 		System.out.println();
 		System.out.println("========= 원생  관리 =========");
-		System.out.println("==| 1. 원생 등록		|==");
-		System.out.println("==| 2. 원생 정보 수정	|==");
-		System.out.println("==| 3. 원생 삭제		|==");
-		System.out.println("==| 4. 전체 원생 목록	|==");
-		System.out.println("==| 5. 인적 사항 조회	|==");
-		System.out.println("==| 6. 성적 관리		|==");
-		System.out.println("==| 7. 출결 조회	|==");
-		System.out.println("==| 0. 메인 메뉴로 돌아가기	|==");
+		System.out.println("==|   1. 원생 등록		|==");
+		System.out.println("==|   2. 원생 정보 수정		|==");
+		System.out.println("==|   3. 원생 삭제		|==");
+		System.out.println("==|   4. 전체 원생 목록		|==");
+		System.out.println("==|   5. 인적 사항 조회		|==");
+		System.out.println("==|   6. 성적 관리		|==");
+		System.out.println("==|   7. 출결 조회		|==");
+		System.out.println("==|   0. 메인 메뉴로 돌아가기	|==");
 		System.out.println("===========================");
 	}
 	
@@ -260,6 +258,14 @@ public class AcademyApp {
 	}
 
 	public void viewAttend() {
-		
+		System.out.print("조회할 원생의 수강번호 입력 > ");
+		int id = scn1.nextInt();
+		System.out.println("===========================================================");
+		System.out.printf("  %s 학생의 출결 기록입니다.\n", access.printName(id).viewName());
+		List<Attendance> attList = access.viewAttend(id);
+		for (Attendance att : attList) {
+			System.out.println(att.viewAtDetail());
+		}
+		System.out.println("===========================================================");
 	}
 }

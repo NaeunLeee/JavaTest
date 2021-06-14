@@ -25,7 +25,7 @@ public interface AcademyAccess {
 	// 교사 로그인
 	public boolean tcLogIn(String id, String pw);
 	// 원생 출석
-	public void attendCheck(int id, String date, String time, int hour);
+	public void attendCheck(int id, String date, String time);
 	// 원생 비밀번호 변경
 	public void updatePw(int id, String pw);
 	// 성적 입력
@@ -33,6 +33,6 @@ public interface AcademyAccess {
 	// 성적 조회
 	public Scores viewScores(int id);
 	// 출결 조회
-	public Attendance viewAttend(int id);
+	public ArrayList<Attendance> viewAttend(int id);
 	
 }
