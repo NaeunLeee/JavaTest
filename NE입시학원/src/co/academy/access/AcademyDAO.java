@@ -24,12 +24,13 @@ public class AcademyDAO implements AcademyAccess {
 	static Scanner scn = new Scanner(System.in);
 	Date date = new Date();
 	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+	SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy");
 	
 	
 	// 원생 등록
 	public void signUp(Student student) {
 		connect();
-		String sql1 = "insert into student (id, pw, name, birth, phone) values (?, ?, ?, ?, ?)";
+		String sql1 = "insert into student (id, pw, name, birth, phone, grade) values (?, ?, ?, ?, ?, ?)";
 		String sql2 = "insert into scores (id, name) values (?, ?)";
 		try {
 			psmt1 = conn.prepareStatement(sql1);
@@ -38,6 +39,7 @@ public class AcademyDAO implements AcademyAccess {
 			psmt1.setString(3, student.getName());
 			psmt1.setString(4, student.getBirth());
 			psmt1.setString(5, student.getPhone());
+			psmt1.setString(6, student.getGrade());
 			psmt2 = conn.prepareStatement(sql2);
 			psmt2.setInt(1, student.getId());
 			psmt2.setString(2, student.getName());
@@ -51,6 +53,22 @@ public class AcademyDAO implements AcademyAccess {
 		}
 	}
 
+	// 학년 계산
+	public String calGrade(String birth) {
+		String grade = "";
+		int birthYear = 2000+Integer.parseInt(birth.substring(0, 2));
+		int age = Integer.parseInt(sdf3.format(date))-birthYear+1;
+		switch (age) {
+		case 19: grade = "고3";	break;
+		case 18: grade = "고2";	break;
+		case 17: grade = "고1";	break;
+		case 16: grade = "중3";	break;
+		case 15: grade = "중2";	break;
+		case 14: grade = "중1";	break;
+		}
+		return grade;
+	}
+	
 	// 원생 정보 수정 (수강번호로 검색, 전화번호 수정)
 	public void updatePhone(Student student) {
 		connect();
@@ -111,9 +129,35 @@ public class AcademyDAO implements AcademyAccess {
 			close();
 		}
 		return studentList;
-		
 	}
 
+	// 학년별 목록 출력
+	public ArrayList<Student> printByGrade(String grade) {
+		ArrayList<Student> studentList = new ArrayList<>();
+		connect();
+		try {
+			String sql = "select * from student where grade=?";
+			psmt1 = conn.prepareStatement(sql);
+			psmt1.setString(1, grade);
+			rs = psmt1.executeQuery();
+			while (rs.next()) {
+				Student student = new Student();
+				student.setId(rs.getInt("id"));
+				student.setPw(rs.getString("pw"));
+				student.setName(rs.getString("name"));
+				student.setBirth(rs.getString("birth"));
+				student.setPhone(rs.getString("phone"));
+				student.setGrade(rs.getString("grade"));
+				studentList.add(student);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return studentList;
+	}
+	
 	// 원생 조회 (이름으로)
 	public ArrayList<Student> findByName(String name) {
 		ArrayList<Student> studentList = new ArrayList<>();
@@ -275,12 +319,13 @@ public class AcademyDAO implements AcademyAccess {
 	public void attendCheck(int id, String date, String time) {
 		connect();
 		String attend = "결석";
+		System.out.println("   현재 시각 : " + time);
 		int hour = Integer.parseInt(time.substring(0, 2));
 		if (hour>=13) {
-			System.out.println("[ 지각 ]");
+			System.out.println("   [ 지각 ]");
 			attend = "지각";
 		} else {
-			System.out.println("[ 정상 출석 완료 ]");
+			System.out.println("   [ 정상 출석 완료 ]");
 			attend = "정상";
 		}
 		String sql = "insert into attendance (id, date, time, attend) values (?, ?, ?, ?)";
@@ -291,7 +336,7 @@ public class AcademyDAO implements AcademyAccess {
 			psmt1.setString(3, time);
 			psmt1.setString(4, attend);
 			int r = psmt1.executeUpdate();
-			System.out.println(r + "건 처리 되었습니다.");
+			System.out.println("   " + r + "건 처리 되었습니다.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

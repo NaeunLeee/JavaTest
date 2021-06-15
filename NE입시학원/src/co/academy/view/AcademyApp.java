@@ -23,11 +23,11 @@ public class AcademyApp {
 	public void mainScreen() {
 		int menuNum;
 		do {
-			System.out.println("===== NE ♥  입시 학원 =====");
+			System.out.println("======= NE ♥ 입시 학원 =======");
 			System.out.println("==|   1. 원생 로그인	|==");
 			System.out.println("==|   2. 교사 로그인	|==");
 			System.out.println("==|   0. 종료		|==");
-			System.out.println("===================");
+			System.out.println("===========================");
 			System.out.print("입력 > ");
 			menuNum = scn1.nextInt();
 			switch (menuNum) {
@@ -52,7 +52,7 @@ public class AcademyApp {
 			stMenu();
 		} else {
 			System.out.println("수강번호와 비밀번호를 다시 확인하세요.");
-			mainScreen();
+			stLogIn();
 		}
 	}
 	
@@ -67,7 +67,8 @@ public class AcademyApp {
 			tcMenu();
 		} else {
 			System.out.println("아이디와 비밀번호를 다시 확인하세요.");
-		} mainScreen();
+			tcLogIn();
+		} 
 	}
 	
 	public void stMenu() {
@@ -79,19 +80,19 @@ public class AcademyApp {
 			switch (menuNum) {
 			case 1: attend();		break;
 			case 2: stViewScores();	break;
-			case 3: setPw();		break;
+			case 3: updatePw();		break;
 			}
 		} while (menuNum!=0);
 	}
 	
 	public void stMenuTitle() {
 		System.out.println();
-		System.out.println("======== 학생 메뉴 ========");
-		System.out.println("==| 1. 출석	체크	|==");
-		System.out.println("==| 2. 성적 조회	|==");
+		System.out.println("========= 로그인 성공 =========");
+		System.out.println("==| 1. 출석 체크		|==");
+		System.out.println("==| 2. 성적 조회		|==");
 		System.out.println("==| 3. 비밀번호 변경	|==");
 		System.out.println("==| 0. 종료		|==");
-		System.out.println("==================================");
+		System.out.println("===========================");
 	}
 	
 	public void attend() {
@@ -101,7 +102,9 @@ public class AcademyApp {
 		String pw = scn1.next();
 		boolean b = access.stLogIn(stLoginId, pw);
 		if (b=true) {
+			System.out.println("==================================");
 			access.attendCheck(stLoginId, d, t);
+			System.out.println("==================================");
 		} else {
 			System.out.println("비밀번호를 다시 확인하세요.");
 		}
@@ -119,7 +122,7 @@ public class AcademyApp {
 		}
 	}
 	
-	public void setPw() {
+	public void updatePw() {
 		System.out.println("비밀번호를 변경합니다.");
 		System.out.print("현재 비밀번호 입력 > ");
 		String stPW = scn2.next();
@@ -157,10 +160,10 @@ public class AcademyApp {
 		System.out.println();
 		System.out.println("========= 원생  관리 =========");
 		System.out.println("==|   1. 원생 등록		|==");
-		System.out.println("==|   2. 원생 정보 수정		|==");
+		System.out.println("==|   2. 원생 정보 수정	|==");
 		System.out.println("==|   3. 원생 삭제		|==");
-		System.out.println("==|   4. 전체 원생 목록		|==");
-		System.out.println("==|   5. 인적 사항 조회		|==");
+		System.out.println("==|   4. 전체 원생 목록	|==");
+		System.out.println("==|   5. 인적 사항 조회	|==");
 		System.out.println("==|   6. 성적 관리		|==");
 		System.out.println("==|   7. 출결 조회		|==");
 		System.out.println("==|   0. 메인 메뉴로 돌아가기	|==");
@@ -179,7 +182,8 @@ public class AcademyApp {
 		String birth = scn1.next();
 		System.out.print("전화번호 > ");
 		String phone = scn2.next();
-		Student student = new Student(id, pw, name, birth, phone);
+		String grade = access.calGrade(birth);
+		Student student = new Student(id, pw, name, birth, phone, grade);
 		access.signUp(student);
 	}
 	
@@ -201,11 +205,45 @@ public class AcademyApp {
 	}
 	
 	public void printAll() {
-		System.out.println("전체 원생 목록을 조회합니다.");
-		List<Student> studentList = access.printAll();
-		for (Student student : studentList) {
-			System.out.println(student.viewInfo());
+		System.out.println("===================");
+		System.out.println("==| 1. 전체 목록	|==");
+		System.out.println("==| 2. 학년별 목록	|==");
+		System.out.println("==| 0. 이전 메뉴	|==");
+		System.out.println("===================");
+		System.out.print("입력 > ");
+		int menuNum = scn1.nextInt();
+		if (menuNum==1) {
+			System.out.println("============> 전체 원생 목록 <============");
+			List<Student> studentList = access.printAll();
+			for (Student student : studentList) {
+				System.out.println(student.viewInfo());
+			}
+			System.out.println("======================================");
+		} else if (menuNum==2) {
+			System.out.println("[1] 중1 |\t[2] 중2 |\t[3] 중3");
+			System.out.println("[4] 고1 |\t[5] 고2 |\t[6] 고3");
+			System.out.print("입력 > ");
+			int m = scn1.nextInt();
+			String grade ="";
+			switch (m) {
+			case 1: grade = "중1"; break;
+			case 2: grade = "중2"; break;
+			case 3: grade = "중3"; break;
+			case 4: grade = "고1"; break;
+			case 5: grade = "고2"; break;
+			case 6: grade = "고3"; break;
+			}
+			System.out.printf("============> %s 원생 목록 <============", grade);
+			System.out.println();
+			List<Student> studentList = access.printByGrade(grade);
+			for (Student student : studentList) {
+				System.out.println(student.viewInfo());
+			}
+			System.out.println("======================================");
+		} else {
+			tcMenu();
 		}
+		
 	}
 	public void findByName() {
 		System.out.print("조회할 원생의 이름 입력 > ");
@@ -214,6 +252,7 @@ public class AcademyApp {
 			List<Student> studentList = access.findByName(name);
 			System.out.println("===========================================================");
 			System.out.printf("  %s 학생의 인적 사항입니다.", name);
+			System.out.println();
 			for (Student student : studentList) {
 				System.out.println("  "+student.viewDetail());
 			}
@@ -224,7 +263,11 @@ public class AcademyApp {
 	}
 	
 	public void manageScores() {
-		System.out.println("1. 성적 입력  |  2. 성적 조회  |  0. 이전 메뉴로 돌아가기");
+		System.out.println("==================");
+		System.out.println("==| 1. 성적 입력 |==");
+		System.out.println("==| 2. 성적 조회 |==");
+		System.out.println("==| 0. 이전 메뉴 |==");
+		System.out.println("==================");
 		System.out.print("입력 > ");
 		int menuNum = scn1.nextInt();
 		if (menuNum==1) {
@@ -253,6 +296,7 @@ public class AcademyApp {
 		int id = scn1.nextInt();
 		System.out.println("===========================================================");
 		System.out.printf("  %s 학생의 성적입니다.", access.printName(id).viewName());
+		System.out.println();
 		System.out.println("  "+access.viewScores(id).scoresDetail());
 		System.out.println("===========================================================");
 	}
@@ -264,7 +308,7 @@ public class AcademyApp {
 		System.out.printf("  %s 학생의 출결 기록입니다.\n", access.printName(id).viewName());
 		List<Attendance> attList = access.viewAttend(id);
 		for (Attendance att : attList) {
-			System.out.println(att.viewAtDetail());
+			System.out.println("  "+att.viewAtDetail());
 		}
 		System.out.println("===========================================================");
 	}

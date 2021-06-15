@@ -10,13 +10,17 @@ public interface AcademyAccess {
 
 	// 원생 등록
 	public void signUp(Student student);
+	// 학년 계산
+	public String calGrade(String birth);
 	// 원생 정보 수정
 	public void updatePhone(Student student);
 	// 원생 삭제
 	public void delete(int id);
 	// 전체 목록 출력
 	public ArrayList<Student> printAll();
-	// 원생 조회 (이름으로)
+	// 학년별 목록 출력
+	public ArrayList<Student> printByGrade(String grade);
+	// 인적사항 조회 (이름으로 검색)
 	public ArrayList<Student> findByName(String name);
 	// 원생 로그인
 	public boolean stLogIn(int id, String pw);

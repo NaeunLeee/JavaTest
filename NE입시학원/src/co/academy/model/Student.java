@@ -7,6 +7,7 @@ public class Student {
 	String name;
 	String birth;
 	String phone;
+	String grade;
 	
 	public int getId() {
 		return id;
@@ -38,13 +39,20 @@ public class Student {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
-	public String toString() {
-		return "Student [id=" + id + ", pw=" + pw + ", name=" + name + ", birth=" + birth + ", phone=" + phone + "]";
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 	
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", pw=" + pw + ", name=" + name + ", birth=" + birth + ", phone=" + phone
+				+ ", grade=" + grade + "]";
+	}
 	public String viewInfo() {
-		return "수강번호 : " + id + " | 이름 : " + name + " | 생년월일 : " + birth;
+		return "  " + id + " | 이름 : " + name + " | 생년월일 : " + birth;
 	}
 	public String viewDetail() {
 		return "수강번호 : " + id + " | 이름 : " + name + " | 생년월일 : " + birth + " | 전화번호 : " + phone;
@@ -52,7 +60,6 @@ public class Student {
 	public String viewName() {
 		return name;
 	}
-	
 
 	public Student() {}
 	
@@ -61,14 +68,14 @@ public class Student {
 		this.name = name;
 	}
 	
-	public Student(int id, String pw, String name, String birth, String phone) {
+	public Student(int id, String pw, String name, String birth, String phone, String grade) {
 		super();
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
 		this.birth = birth;
 		this.phone = phone;
+		this.grade = grade;
 	}
-	
 	
 }
