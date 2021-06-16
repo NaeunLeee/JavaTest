@@ -70,13 +70,13 @@ public class AcademyDAO implements AcademyAccess {
 	}
 	
 	// 원생 정보 수정 (수강번호로 검색, 전화번호 수정)
-	public void updatePhone(Student student) {
+	public void updatePhone(int id, String phone) {
 		connect();
 		String sql = "update student set phone=? where id=?";
 		try {
 			psmt1 = conn.prepareStatement(sql);
-			psmt1.setString(1, student.getPhone());
-			psmt1.setInt(2, student.getId());
+			psmt1.setString(1, phone);
+			psmt1.setInt(2, id);
 			int r = psmt1.executeUpdate();
 			System.out.println(r + "명의 정보를 수정하였습니다.");
 		} catch (SQLException e) {
@@ -205,23 +205,25 @@ public class AcademyDAO implements AcademyAccess {
 	}
 	
 	// 수강번호 입력 시 이름 출력
-	public Student printName(int id) {
+	public String printName(int id) {
 		connect();
 		String sql = "select name from student where id=?";
-		Student student = new Student();
+		String name = "";
 		try {
 			psmt1 = conn.prepareStatement(sql);
 			psmt1.setInt(1, id);
 			rs = psmt1.executeQuery();
-			while (rs.next()) {
-				student.setName(rs.getString("name"));
+			if (rs.next()) {
+				name = rs.getString("name");
+			} else {
+				name = "없음";
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close();
 		}
-		return student;
+		return name;
 	}
 	
 	// 교사 로그인
@@ -338,6 +340,24 @@ public class AcademyDAO implements AcademyAccess {
 			close();
 		}
 	}
+	
+//	// 원생 퇴실
+//	public void checkout (int id, String coTime) {
+//		connect();
+//		System.out.println("   현재 시각 : " + coTime);
+//		String sql = "update attendance set coTime=? where id=?";
+//		try {
+//			psmt1 = conn.prepareStatement(sql);
+//			psmt1.setString(1, coTime);
+//			psmt1.setInt(1, id);
+//			psmt1.executeUpdate();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close();
+//		}
+//	}
+	
 	
 	// 원생 비밀번호 변경
 	public void updatePw(int id, String pw) {

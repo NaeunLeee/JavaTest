@@ -13,7 +13,7 @@ public interface AcademyAccess {
 	// 학년 계산
 	public String calGrade(String birth);
 	// 원생 정보 수정
-	public void updatePhone(Student student);
+	public void updatePhone(int id, String phone);
 	// 원생 삭제
 	public void delete(int id);
 	// 전체 목록 출력
@@ -25,7 +25,7 @@ public interface AcademyAccess {
 	// 원생 로그인
 	public boolean stLogIn(int id, String pw);
 	// 로그인 시 이름 출력
-	public Student printName(int id);
+	public String printName(int id);
 	// 교사 로그인
 	public boolean tcLogIn(String id, String pw);
 	// 원생 출석

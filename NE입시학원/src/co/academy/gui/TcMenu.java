@@ -2,8 +2,6 @@ package co.academy.gui;
 
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,12 +44,15 @@ public class TcMenu extends JFrame {
         
         updateBtn.setFont(new Font("맑은 고딕", 0, 14)); // NOI18N
         updateBtn.setText("정보 수정");
+        updateBtn.addActionListener(e -> new Update());
 
         deleteBtn.setFont(new Font("맑은 고딕", 0, 14)); // NOI18N
         deleteBtn.setText("원생 삭제");
+        deleteBtn.addActionListener(e -> new Delete());
 
         findBtn.setFont(new Font("맑은 고딕", 0, 14)); // NOI18N
         findBtn.setText("원생 조회");
+        findBtn.addActionListener(e -> new FindByName());
 
         printAllBtn.setFont(new Font("맑은 고딕", 0, 14)); // NOI18N
         printAllBtn.setText("전체 목록");
