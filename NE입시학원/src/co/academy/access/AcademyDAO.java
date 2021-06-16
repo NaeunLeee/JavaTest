@@ -188,16 +188,13 @@ public class AcademyDAO implements AcademyAccess {
 	public boolean stLogIn(int id, String pw) {
 		connect();
 		boolean b = false;
-		String sql = "select * from student where id=? and pw=?";
+		String sql = "select pw from student where id=?";
 		try {
 			psmt1 = conn.prepareStatement(sql);
 			psmt1.setInt(1, id);
-			psmt1.setString(1, pw);
 			rs = psmt1.executeQuery();
-			if (rs.next()) {
+			if (rs.getString("pw").equals(pw)) {
 				b = true;
-			} else {
-				b = false;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -231,16 +228,13 @@ public class AcademyDAO implements AcademyAccess {
 	public boolean tcLogIn(String tcID, String tcPW) {
 		connect();
 		boolean b = false;
-		String sql = "select * from teacher where tcID=? and tcPW=?";
+		String sql = "select tcPW from teacher where tcID=?";
 		try {
 			psmt1 = conn.prepareStatement(sql);
 			psmt1.setString(1, tcID);
-			psmt1.setString(1, tcPW);
 			rs = psmt1.executeQuery();
-			if (rs.next()) {
+			if (rs.getString("tcPW").equals(tcPW)) {
 				b = true;
-			} else {
-				b = false;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -248,6 +242,7 @@ public class AcademyDAO implements AcademyAccess {
 			close();
 		}
 		return b;
+
 	}
 	
 	// 성적 입력
@@ -336,7 +331,7 @@ public class AcademyDAO implements AcademyAccess {
 			psmt1.setString(3, time);
 			psmt1.setString(4, attend);
 			int r = psmt1.executeUpdate();
-			System.out.println("   " + r + "건 처리 되었습니다.");
+//			System.out.println("   " + r + "건 처리 되었습니다.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

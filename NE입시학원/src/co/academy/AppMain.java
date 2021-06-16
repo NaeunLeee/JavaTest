@@ -1,15 +1,15 @@
 package co.academy;
 
-import co.academy.view.AcademyApp;
+import co.academy.gui.AcademyGuiApp;
 
 public class AppMain {
 
 	public static void main(String[] args) {
-		AcademyApp academyApp = new AcademyApp();
-		academyApp.mainScreen();
+//		AcademyApp academyApp = new AcademyApp();
+//		academyApp.mainScreen();
 		
-//		new AcademyGui3();
-		
+//		new AcademyGui5();
+		new AcademyGuiApp();
 	}
 
 }

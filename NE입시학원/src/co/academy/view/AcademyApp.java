@@ -44,8 +44,7 @@ public class AcademyApp {
 		stLoginId = scn1.nextInt();
 		System.out.print("　　　비밀번호 > ");
 		String stPW = scn2.next();
-		boolean b = access.stLogIn(stLoginId, stPW);
-		if (b=true) {
+		if (access.stLogIn(stLoginId, stPW)) {
 			System.out.println();
 			System.out.printf("───────┤ %s 학생 환영합니다. ├───────", access.printName(stLoginId).viewName());
 			System.out.println();
@@ -62,8 +61,7 @@ public class AcademyApp {
 		tcloginId = scn1.next();
 		System.out.print("　　　비밀번호 > ");
 		String tcPW = scn2.next();
-		boolean b = access.tcLogIn(tcloginId, tcPW);
-		if (b=true) {
+		if (access.tcLogIn(tcloginId, tcPW)) {
 			tcMenu();
 		} else {
 			System.out.println("아이디와 비밀번호를 다시 확인하세요.");
