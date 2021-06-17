@@ -26,6 +26,8 @@ public interface AcademyAccess {
 	public boolean stLogIn(int id, String pw);
 	// 로그인 시 이름 출력
 	public String printName(int id);
+	// 이름 유무 판단
+	public boolean searchName(String name);
 	// 교사 로그인
 	public boolean tcLogIn(String id, String pw);
 	// 원생 출석
