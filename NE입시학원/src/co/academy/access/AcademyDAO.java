@@ -226,6 +226,28 @@ public class AcademyDAO implements AcademyAccess {
 		return name;
 	}
 	
+	// 이름 유무 판단
+	public boolean searchName(String name) {
+		connect();
+		String sql = "select * from student where name=?";
+		boolean b = false;
+		try {
+			psmt1 = conn.prepareStatement(sql);
+			psmt1.setString(1, name);
+			rs = psmt1.executeQuery();
+			if (rs.next()) {
+				b = true;
+			} else {
+				b = false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return b;
+	}
+	
 	// 교사 로그인
 	public boolean tcLogIn(String tcID, String tcPW) {
 		connect();
