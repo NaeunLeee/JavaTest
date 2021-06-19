@@ -3,35 +3,34 @@ package bjProblem;
 import java.util.Scanner;
 
 public class P4344 {
-
-	static Scanner scn1 = new Scanner(System.in);
-	static Scanner scn2 = new Scanner(System.in);
-	static int sum;
-	static int avg;
-	
-	public static void main(String[] args) {
-		print();
-	}
-	
-	public static void print() {
-		System.out.print("학생의 수를 입력하세요 > ");
-		int n = scn1.nextInt();
-		System.out.printf("학생 %d명의 점수를 입력하세요 > ", n);
-		String[] arr = scn2.nextLine().split(" ");
-
-		for (String s : arr) {
-			sum += Integer.parseInt(s);
-		}
-		avg = sum/arr.length;
-		int cnt = 0;
-		for (String s : arr) {
-			if (Integer.parseInt(s)<avg) {
-				cnt += 1;
-			}
-		}
-		double share = ((double)cnt/(double)arr.length)*100;
-		System.out.printf("평균 %d점을 넘지 못하는 학생의 비율은 ", avg);
-		System.out.printf(share + "입니다.");
-	}
-
+ 
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        System.out.print("테스트 횟수 > ");
+        int tsCase = scn.nextInt();
+        int st, sum, cnt;
+        double avg;
+        int scores[] = new int[1000];
+         
+        for (int i=0; i<tsCase; ++i) {
+        	System.out.print("학생 수와 점수 > ");
+            st = scn.nextInt();
+            sum = 0;
+            cnt = 0;
+            for (int j=0; j<st; ++j) {
+                scores[j] = scn.nextInt();
+                sum += scores[j];
+            }
+            avg = (double)sum/st;
+             
+            for (int j=0; j<st; ++j) {
+                if (scores[j] > avg) {
+                    cnt++;
+                }
+            }
+            System.out.printf("%.3f", 100.0*cnt/st);
+            System.out.println("%");
+        }
+        scn.close();
+    }
 }
